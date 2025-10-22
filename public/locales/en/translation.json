@@ -1,6 +1,6 @@
 {
-          "greeting": "Hello, {{name}}!",
+          "Hello, {{name}}!": "Hello, {{name}}!",
           "guest": "guest",
           "switch": "Switch to Ukrainian",
-          "enterName": "Enter your name"
+          "Enter your name": "Enter your name"
 }

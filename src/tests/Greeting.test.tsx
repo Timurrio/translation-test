@@ -1,13 +1,13 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterAll } from "vitest";
 import Greeting from "../components/Greeting";
 
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string, opts?: any) => {
-      if (key === "greeting") return `Hello, ${opts?.name || "guest"}!`;
+      if (key === "Hello, {{name}}!") return `Hello, ${opts?.name || "guest"}!`;
       if (key === "guest") return "guest";
-      if (key === "enterName") return "Enter your name";
+      if (key === "Enter your name") return "Enter your name";
       return key;
     },
   }),
@@ -17,6 +17,11 @@ describe("Greeting component", () => {
   beforeEach(() => {
     localStorage.clear();
     vi.clearAllMocks();
+  });
+
+  afterAll(() => {
+    localStorage.clear();
+    vi.restoreAllMocks();
   });
 
   it("should render with 'guest' when no name is stored", () => {

@@ -1,30 +1,27 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const Greeting: React.FC = () => {
-  const { t } = useTranslation();
+const Greeting = () => {
+  const { t } = useTranslation("translation");
   const [name, setName] = useState<string>(
     () => localStorage.getItem("name") || ""
   );
 
-  useEffect(() => {
-    localStorage.setItem("name", name);
-  }, [name]);
-
   return (
-    <div style={{ textAlign: "center", marginTop: "2rem" }}>
-      <h1>{t("greeting", { name: name || t("guest") })}</h1>
+    <div className="text-center mt-8 flex flex-col items-center">
+      <h1 className="text-3xl font-bold py-5">
+        {t("Hello, {{name}}!", { name: name || t("guest") })}
+      </h1>
       <input
         type="text"
-        placeholder={t("enterName")}
+        placeholder={t("Enter your name")}
         value={name}
-        onChange={(e) => setName(e.target.value)}
-        style={{
-          padding: "8px 12px",
-          borderRadius: "8px",
-          border: "1px solid #ccc",
-          marginTop: "12px",
+        onChange={(e) => {
+          const newName = e.target.value;
+          setName(newName);
+          localStorage.setItem("name", newName);
         }}
+        className="py-2 px-3 mt-3 rounded-2xl border border-gray-500 max-w-50"
       />
     </div>
   );
