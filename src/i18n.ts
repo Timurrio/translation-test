@@ -12,8 +12,6 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-    ns: ["translation", "home"],
-    defaultNS: "translation",
   });
 
 export default i18n;
