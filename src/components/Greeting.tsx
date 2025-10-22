@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
 
 const Greeting = () => {
@@ -6,6 +6,12 @@ const Greeting = () => {
   const [name, setName] = useState<string>(
     () => localStorage.getItem("name") || ""
   );
+
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    const newName = e.target.value;
+    setName(newName);
+    localStorage.setItem("name", newName);
+  }
 
   return (
     <div className="text-center mt-8 flex flex-col items-center">
@@ -16,11 +22,7 @@ const Greeting = () => {
         type="text"
         placeholder={t("Enter your name")}
         value={name}
-        onChange={(e) => {
-          const newName = e.target.value;
-          setName(newName);
-          localStorage.setItem("name", newName);
-        }}
+        onChange={handleInputChange}
         className="py-2 px-3 mt-3 rounded-2xl border border-gray-500 max-w-50"
       />
     </div>

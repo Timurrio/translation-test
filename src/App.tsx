@@ -1,9 +1,13 @@
 import { useTranslation } from "react-i18next";
 import Greeting from "./components/Greeting";
 import Home from "./components/Home";
+import { countAtom } from "./jotai/countAtom";
+import { useAtom } from "jotai";
+import Counter from "./components/Counter";
 
 const App = () => {
   const { t, i18n } = useTranslation();
+  const [count, setCount] = useAtom(countAtom);
 
   const toggleLanguage = () => {
     const newLang = i18n.language === "en" ? "uk" : "en";
@@ -20,6 +24,8 @@ const App = () => {
       </button>
       <Home />
       <Greeting />
+      <Counter />
+      <div>Current count is {count}</div>
     </main>
   );
 };

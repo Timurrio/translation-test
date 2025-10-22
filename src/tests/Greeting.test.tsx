@@ -44,6 +44,7 @@ describe("Greeting component", () => {
     fireEvent.change(input, { target: { value: "Alice" } });
 
     expect(screen.getByDisplayValue("Alice")).toBeInTheDocument();
+
     expect(screen.getByText("Hello, Alice!")).toBeInTheDocument();
   });
 
